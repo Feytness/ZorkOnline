@@ -1,0 +1,6 @@
+@ZorkAPI_HostAddress = http://localhost:5283
+
+GET {{ZorkAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

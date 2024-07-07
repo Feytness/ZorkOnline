@@ -1,0 +1,46 @@
+﻿@typeparam TModel
+
+@if (Model != null)
+{
+    <form @onsubmit="HandleSubmit">
+        @for (var i = 0; i < typeof(TModel).GetProperties().Length; i++)
+        {
+            var property = typeof(TModel).GetProperties()[i];
+            var propertyName = property.Name;
+            var propertyValue = property.GetValue(Model);
+
+            <div class="form-group">
+                <label for="@propertyName">@propertyName</label>
+                @if (property.PropertyType == typeof(string))
+                {
+                }
+                else if (property.PropertyType == typeof(int))
+                {
+                    <input type="number" class="form-control" id="@propertyName"  bind="@((int)propertyValue)" />
+                }
+                else if (property.PropertyType == typeof(bool))
+                {
+                    <input type="checkbox" class="form-check-input" id="@propertyName" bind="@((bool)propertyValue)" />
+                }
+            </div>
+        }
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+}
+else
+{
+    <p>No model provided.</p>
+}
+
+@code {
+    [Parameter]
+    public TModel Model { get; set; }
+
+    [Parameter]
+    public EventCallback<TModel> OnSubmit { get; set; }
+
+    private async Task HandleSubmit()
+    {
+        await OnSubmit.InvokeAsync(Model);
+    }
+}

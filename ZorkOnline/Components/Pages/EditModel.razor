@@ -1,0 +1,14 @@
+﻿@page "/edit"
+@rendermode InteractiveServer
+
+@using ZorkData.Models;
+@using ZorkOnline.Components.Templates;
+
+<h3>Dynamic Form Example</h3>
+
+<Counter />
+
+<DynamicForm TModel="Rarity" Model="formData" OnSubmit="HandleFormSubmission" />
+
+@code {
+}

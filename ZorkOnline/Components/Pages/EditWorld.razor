@@ -1,0 +1,23 @@
+﻿@page "/Worlds"
+
+<h3>Worlds</h3>
+
+<div>
+	<div>
+		<label>
+			Select a World: 
+			<InputSelect @bind-Value="SelectedWorld" @onchange="SelectWorld">
+				@foreach (var wrld in WorldList)
+				{
+					<option value="@wrld.Id">@wrld.Name</option>
+				}
+			</InputSelect>
+		</label>
+	</div>
+	<div>
+		<div>
+			<h4>@CurrentWorld.Name</h4>
+			<h6>@CurrentWorld.Description</h6>
+		</div>
+	</div>
+</div>
